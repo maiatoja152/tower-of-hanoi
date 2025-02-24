@@ -1,4 +1,4 @@
-"""Command-line Tower of Hanoi game"""
+"""Command-line Tower of Hanoi game."""
 import argparse
 import random
 from typing import List
@@ -11,9 +11,9 @@ Towers = Dict[str, List[int]]
 
 
 def get_arguments() -> argparse.Namespace:
-    """Get the command-line arguments"""
+    """Get the command-line arguments."""
     parser = argparse.ArgumentParser(
-        description="Command-line Tower of Hanoi game"
+        description="Command-line Tower of Hanoi game."
     )
     parser.add_argument(
         "-n",
@@ -21,13 +21,13 @@ def get_arguments() -> argparse.Namespace:
         type=int,
         choices=range(3, 20),
         default=5,
-        help="The number of disks in the tower",
+        help="The number of disks in the tower.",
     )
     return parser.parse_args()
 
 
 def display_towers(towers: Towers, number_of_disks: int) -> None:
-    """Print a display of the towers to the console"""
+    """Print a display of the towers to the console."""
     tower_width: int = number_of_disks * 2 + 2
     letter_spaces = " " * (tower_width - 1)
     lines: List[str] = [
@@ -52,6 +52,9 @@ def display_towers(towers: Towers, number_of_disks: int) -> None:
 
 
 def make_player_move(towers: Towers) -> None:
+    """
+    Prompt the player to input a move, validate the input, then make the move.
+    """
     while True:
         player_move = input(
             """
@@ -66,7 +69,7 @@ A disk cannot be moved on top of a smaller disk.
 
         valid_moves = ("AB", "BA", "AC", "CA", "BC", "CB")
         if player_move not in valid_moves:
-            print(f"Your input must be one of: {', '.join(valid_moves)}, or QUIT")
+            print(f"Your input must be one of: {', '.join(valid_moves)}, or QUIT.")
             continue
 
         from_tower = towers[player_move[0]]
@@ -88,6 +91,7 @@ def check_win(
         starting_tower: str,
         number_of_disks: int,
 ) -> bool:
+    """Return whether the player won based on the state of the towers."""
     for tower, disks in towers.items():
         if len(disks) == number_of_disks and tower != starting_tower:
             return True
